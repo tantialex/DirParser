@@ -23,7 +23,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirParser.Database.Core.Tes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{D2324B8B-7387-4517-82C7-18FF7ADFD79D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirParser.Console", "Console\DirParser.Console\DirParser.Console.csproj", "{1D2401D1-51D9-402B-A6DF-C86BAB07D828}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirParser.Console", "Console\DirParser.Console\DirParser.Console.csproj", "{1D2401D1-51D9-402B-A6DF-C86BAB07D828}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Informix", "Informix", "{E6C251DD-FF28-4808-9A3A-2C5F4064EE10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirParser.Procedure.Informix", "Informix\DirParser.Procedure.Informix\DirParser.Procedure.Informix.csproj", "{53E84877-4F5F-4E3B-94ED-999BB897A81F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirParser.Procedure.Core", "Core\DirParser.Procedure.Core\DirParser.Procedure.Core.csproj", "{042B0A1B-334C-4574-AAC9-266C0B1EA412}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +61,14 @@ Global
 		{1D2401D1-51D9-402B-A6DF-C86BAB07D828}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D2401D1-51D9-402B-A6DF-C86BAB07D828}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D2401D1-51D9-402B-A6DF-C86BAB07D828}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53E84877-4F5F-4E3B-94ED-999BB897A81F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53E84877-4F5F-4E3B-94ED-999BB897A81F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53E84877-4F5F-4E3B-94ED-999BB897A81F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53E84877-4F5F-4E3B-94ED-999BB897A81F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{042B0A1B-334C-4574-AAC9-266C0B1EA412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{042B0A1B-334C-4574-AAC9-266C0B1EA412}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{042B0A1B-334C-4574-AAC9-266C0B1EA412}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{042B0A1B-334C-4574-AAC9-266C0B1EA412}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +82,8 @@ Global
 		{A7F7063C-250A-4B48-9168-D7BFC07F285A} = {F64845EC-81BC-4327-B0F9-D255E20A515F}
 		{955B23E4-BC36-403B-8CDA-D1B20DDB2D9F} = {A7F7063C-250A-4B48-9168-D7BFC07F285A}
 		{1D2401D1-51D9-402B-A6DF-C86BAB07D828} = {D2324B8B-7387-4517-82C7-18FF7ADFD79D}
+		{53E84877-4F5F-4E3B-94ED-999BB897A81F} = {E6C251DD-FF28-4808-9A3A-2C5F4064EE10}
+		{042B0A1B-334C-4574-AAC9-266C0B1EA412} = {F64845EC-81BC-4327-B0F9-D255E20A515F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {87A675AE-5418-4E14-832F-F3779DC79003}
