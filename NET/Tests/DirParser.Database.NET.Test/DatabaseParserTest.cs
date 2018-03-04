@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DeepEqual;
 using DeepEqual.Syntax;
 using System.Linq;
+using DirParser.NET;
 
 namespace DirParser.Database.NET.Test {
     [TestClass]

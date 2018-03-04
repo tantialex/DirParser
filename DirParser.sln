@@ -11,11 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirParser.Database.Core", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NET", "NET", "{A6412CCE-9525-42BA-8163-3663F9772178}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirParser.Database.NET", "NET\DirParser.Database.NET\DirParser.Database.NET.csproj", "{B09E427D-F8E2-4B8D-9D48-15C4B54DC51C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirParser.NET", "NET\DirParser.Database.NET\DirParser.NET.csproj", "{B09E427D-F8E2-4B8D-9D48-15C4B54DC51C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{AA1DDFA6-B4D4-4EE1-933D-23CAA377E50D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirParser.Database.NET.Test", "NET\Tests\DirParser.Database.NET.Test\DirParser.Database.NET.Test.csproj", "{4B09AA8A-1A9D-40E8-9DB3-A4DE42FC0A0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirParser.NET.Test", "NET\Tests\DirParser.Database.NET.Test\DirParser.NET.Test.csproj", "{4B09AA8A-1A9D-40E8-9DB3-A4DE42FC0A0D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A7F7063C-250A-4B48-9168-D7BFC07F285A}"
 EndProject
@@ -27,9 +27,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirParser.Console", "Consol
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Informix", "Informix", "{E6C251DD-FF28-4808-9A3A-2C5F4064EE10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirParser.Procedure.Informix", "Informix\DirParser.Procedure.Informix\DirParser.Procedure.Informix.csproj", "{53E84877-4F5F-4E3B-94ED-999BB897A81F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirParser.Informix", "Informix\DirParser.Procedure.Informix\DirParser.Informix.csproj", "{53E84877-4F5F-4E3B-94ED-999BB897A81F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirParser.Procedure.Core", "Core\DirParser.Procedure.Core\DirParser.Procedure.Core.csproj", "{042B0A1B-334C-4574-AAC9-266C0B1EA412}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirParser.Procedure.Core", "Core\DirParser.Procedure.Core\DirParser.Procedure.Core.csproj", "{042B0A1B-334C-4574-AAC9-266C0B1EA412}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirParser.Project.Core", "Project\DirParser.Project.Core\DirParser.Project.Core.csproj", "{BCBCA9F9-3A65-48A3-9D00-1CF5A96B1B3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{042B0A1B-334C-4574-AAC9-266C0B1EA412}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{042B0A1B-334C-4574-AAC9-266C0B1EA412}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{042B0A1B-334C-4574-AAC9-266C0B1EA412}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCBCA9F9-3A65-48A3-9D00-1CF5A96B1B3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCBCA9F9-3A65-48A3-9D00-1CF5A96B1B3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCBCA9F9-3A65-48A3-9D00-1CF5A96B1B3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCBCA9F9-3A65-48A3-9D00-1CF5A96B1B3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,6 +90,7 @@ Global
 		{1D2401D1-51D9-402B-A6DF-C86BAB07D828} = {D2324B8B-7387-4517-82C7-18FF7ADFD79D}
 		{53E84877-4F5F-4E3B-94ED-999BB897A81F} = {E6C251DD-FF28-4808-9A3A-2C5F4064EE10}
 		{042B0A1B-334C-4574-AAC9-266C0B1EA412} = {F64845EC-81BC-4327-B0F9-D255E20A515F}
+		{BCBCA9F9-3A65-48A3-9D00-1CF5A96B1B3B} = {F64845EC-81BC-4327-B0F9-D255E20A515F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {87A675AE-5418-4E14-832F-F3779DC79003}

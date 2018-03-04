@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace DirParser.Procedure.Informix {
+namespace DirParser.Informix {
     public class InformixProcedureParser : IProcedureParser {
         private static readonly Regex NAME_REGEX = new Regex("CREATE PROCEDURE[ ]+\"informix\"(?<procName>[^ ,(]*)");
         private static readonly Regex PROCEDURE_REGEX = new Regex("execute procedure[ ]+(?<procName>[^ ,(]+)");

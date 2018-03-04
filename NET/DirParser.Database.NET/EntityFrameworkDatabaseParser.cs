@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace DirParser.Database.NET {
+namespace DirParser.NET {
     public class EntityFrameworkDatabaseParser : IDatabaseParser {
         private static readonly Regex TABLE_NAME_REGEX = new Regex("ToTable\\(\"(?<tableName>[^ \"]*)\"");
 

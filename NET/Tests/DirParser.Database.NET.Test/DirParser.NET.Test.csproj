@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\DirParser.Database.Core\DirParser.Database.Core.csproj" />
-    <ProjectReference Include="..\..\DirParser.Database.NET\DirParser.Database.NET.csproj" />
+    <ProjectReference Include="..\..\DirParser.Database.NET\DirParser.NET.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,9 @@
 ﻿using DirParser.Core;
 using DirParser.Database.Core;
-using DirParser.Database.NET;
+using DirParser.Informix;
+using DirParser.NET;
 using DirParser.Procedure.Core;
-using DirParser.Procedure.Informix;
+using DirParser.Project.Core;
 using System;
 using System.Linq;
 
@@ -14,14 +15,22 @@ namespace DirParser {
             IFileReader fileReader = new FileReader();
             IDirectoryBrowser directoryBrowser = new DirectoryBrowser(root, fileReader);
 
+            IProjectParser projectParser = new NETCoreProjectParser();
             IDatabaseParser databaseParser = new EntityFrameworkDatabaseParser();
             IProcedureParser procedureParser = new InformixProcedureParser();
-
 
             DirFile file;
             int i = 0;
             int hits = 0;
             while ((file = directoryBrowser.NextFile()) != null) {
+                ProjectParseReport projectParseReport = projectParser.Parse(file);
+
+                if (projectParseReport.Name != null) {
+                RefreshConsole();
+                    Console.WriteLine(file.Name);
+                    Console.WriteLine(OutputProjectReport(projectParseReport));
+                }
+
                 DatabaseParseReport parseReports = databaseParser.Parse(file.Content);
 
                 if (parseReports.Tables.Count() > 0) {
@@ -45,6 +54,18 @@ namespace DirParser {
 
         private static void RefreshConsole() {
             Console.WriteLine("\r" + new string(' ', Console.WindowWidth - 2));
+        }
+
+        private static string OutputProjectReport(ProjectParseReport projectParseReport) {
+            string header = "\tProject Report";
+            string refs = String.Join(',', projectParseReport.ReferencedProjects.Select(x => x.Name+"."+x.Extension));
+            string name = projectParseReport.Name;
+
+            string output = header + "\n" +
+                            "\t\tName: " + name + "\n" +
+                            "\t\tReferences: " + refs;
+
+            return output;
         }
 
         private static string OutputDatabaseReport(DatabaseParseReport dbReport) {
