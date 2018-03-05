@@ -7,8 +7,4 @@
   <ItemGroup>
     <Compile Remove="Models\Paths\FilePointer.cs" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\DirParser.Database.Core\DirParser.Database.Core.csproj" />
-  </ItemGroup>
 </Project>

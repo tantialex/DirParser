@@ -14,7 +14,9 @@ namespace DirParser.NET {
         public ProjectParseReport Parse(DirFile file) {
             ProjectParseReport databaseReport = null;
 
-            databaseReport = new ProjectParseReport(GetName(file.Name), GetReferences(file.Content));
+            if(file.Extension == "csproj") {
+                databaseReport = new ProjectParseReport(GetName(file.Name), GetReferences(file.Content));
+            }
 
             return databaseReport;
         }
@@ -24,11 +26,7 @@ namespace DirParser.NET {
 
             Match match = matches.FirstOrDefault();
                 
-            if(match != null && match.Groups["ext"].Value.Trim().ToLower() == "csproj") {
-                return match.Groups["name"].Value.Trim();
-            }
-
-            return null;
+            return match.Groups["name"].Value.Trim();
         }
 
         private IEnumerable<ReferenceParseReport> GetReferences(string source) {

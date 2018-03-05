@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Core\DirParser.Core\DirParser.Core.csproj" />
     <ProjectReference Include="..\..\Core\DirParser.Procedure.Core\DirParser.Procedure.Core.csproj" />
     <ProjectReference Include="..\..\Informix\DirParser.Procedure.Informix\DirParser.Informix.csproj" />

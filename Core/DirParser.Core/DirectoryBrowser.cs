@@ -4,19 +4,23 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using DirParser.Core.Extensions;
+using System.Linq;
+using System.Collections;
 
 namespace DirParser.Core {
     public class DirectoryBrowser : IDirectoryBrowser {
         private IFileReader _fileReader;
         private Stack<IPath> _stackedPaths;
+        private IEnumerable<string> _excludes;
 
-        public DirectoryBrowser(string rootFolder, IFileReader fileReader) {
+        public DirectoryBrowser(string rootFolder, IFileReader fileReader, IEnumerable<string> excludes = null) {
             if (!Directory.Exists(rootFolder)) {
                 throw new ArgumentException("Root folder '" + rootFolder + "' does not exist!");
             }
 
             this._fileReader = fileReader;
             this._stackedPaths = new Stack<IPath>();
+            this._excludes = excludes ?? new string[0];
 
             Init(rootFolder);
         }
@@ -37,6 +41,10 @@ namespace DirParser.Core {
             IPath path;
 
             while(_stackedPaths.TryPop(out path)) {
+                if (IsExcluded(path)) {
+                    Console.WriteLine("Excluded: " + path.Name);
+                    continue;
+                }
                 if (path.GetType() == typeof(FilePath)) {
                     return GenerateFile((FilePath)path);
                 } else if(path.GetType() == typeof(DirectoryPath)) {
@@ -47,11 +55,16 @@ namespace DirParser.Core {
             return null;
         }
 
+        public bool IsExcluded(IPath path) {
+            return _excludes.Contains(path.Name);
+        }
+
         private DirFile GenerateFile(FilePath path) {
-            string fileName = Path.GetFileName(path.Path);
+            string extension = path.Name.Split('.').Last().ToLower();
+            string fileName = path.Name;
             string content = _fileReader.Read(path.Path);
 
-            return new DirFile(fileName, content);
+            return new DirFile(fileName, extension, content);
         }
     }
 }

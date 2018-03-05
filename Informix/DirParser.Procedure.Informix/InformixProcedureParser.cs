@@ -1,4 +1,5 @@
-﻿using DirParser.Procedure.Core;
+﻿using DirParser.Core;
+using DirParser.Procedure.Core;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,16 +7,18 @@ using System.Text.RegularExpressions;
 
 namespace DirParser.Informix {
     public class InformixProcedureParser : IProcedureParser {
-        private static readonly Regex NAME_REGEX = new Regex("CREATE PROCEDURE[ ]+\"informix\"(?<procName>[^ ,(]*)");
-        private static readonly Regex PROCEDURE_REGEX = new Regex("execute procedure[ ]+(?<procName>[^ ,(]+)");
+        private static readonly Regex NAME_REGEX = new Regex("CREATE PROCEDURE[ ]+\"informix\"\\.(?<procName>[^ ,(]*)");
+        private static readonly Regex PROCEDURE_REGEX = new Regex("execute procedure[ ]+(?:\"informix\"\\.)*(?<procName>[^ ,(]+)");
         private static readonly Regex TABLE_REGEX = new Regex("[\\n,\\r, ,\\t]from[ ]+(?<tableName>[^ ,\\n,;]+)"); //TODO: Fix to accept after comma
 
-        public ProcedureParseReport Parse(string source) {
-            ProcedureParseReport databaseReport = null;
+        public ProcedureParseReport Parse(DirFile file) {
+            ProcedureParseReport procedureReport = null;
 
-            databaseReport = new ProcedureParseReport(GetName(source), GetProcedures(source), GetTables(source));
+            if (file.Extension == "sql") {
+                procedureReport = new ProcedureParseReport(GetName(file.Content), GetProcedures(file.Content), GetTables(file.Content));
+            }
 
-            return databaseReport;
+            return procedureReport;
         }
 
         private string GetName(string source) {

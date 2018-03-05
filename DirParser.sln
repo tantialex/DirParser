@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirParser.Database.Core.Tes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{D2324B8B-7387-4517-82C7-18FF7ADFD79D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirParser.Console", "Console\DirParser.Console\DirParser.Console.csproj", "{1D2401D1-51D9-402B-A6DF-C86BAB07D828}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirParser", "Console\DirParser.Console\DirParser.csproj", "{1D2401D1-51D9-402B-A6DF-C86BAB07D828}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Informix", "Informix", "{E6C251DD-FF28-4808-9A3A-2C5F4064EE10}"
 EndProject

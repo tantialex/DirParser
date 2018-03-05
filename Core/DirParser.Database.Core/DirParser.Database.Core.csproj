@@ -9,4 +9,8 @@
     <Compile Remove="Interfaces\IReader.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DirParser.Core\DirParser.Core.csproj" />
+  </ItemGroup>
+
 </Project>

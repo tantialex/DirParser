@@ -1,4 +1,5 @@
-﻿using DirParser.Database.Core;
+﻿using DirParser.Core;
+using DirParser.Database.Core;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,12 @@ namespace DirParser.NET {
     public class EntityFrameworkDatabaseParser : IDatabaseParser {
         private static readonly Regex TABLE_NAME_REGEX = new Regex("ToTable\\(\"(?<tableName>[^ \"]*)\"");
 
-        public DatabaseParseReport Parse(string source) {
+        public DatabaseParseReport Parse(DirFile file) {
             DatabaseParseReport databaseReport = null;
 
-            databaseReport = new DatabaseParseReport(GetTables(source));
+            if (file.Extension == "cs") {
+                databaseReport = new DatabaseParseReport(GetTables(file.Content));
+            }
 
             return databaseReport;
         }
