@@ -64,7 +64,7 @@ namespace DirParser.Core {
             string fileName = path.Name;
             string content = _fileReader.Read(path.Path);
 
-            return new DirFile(fileName, extension, content);
+            return new DirFile(fileName, extension, content, path.Path);
         }
     }
 }

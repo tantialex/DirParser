@@ -16,7 +16,7 @@ namespace DirParser {
             string root = args[0];
 
             IFileReader fileReader = new FileReader();
-            IDirectoryBrowser directoryBrowser = new DirectoryBrowser(root, fileReader, new string[] { "node_modules", "$tf" });
+            IDirectoryBrowser directoryBrowser = new DirectoryBrowser(root, fileReader, new string[] { "node_modules", "$tf", "packages" });
 
             IProjectParser projectParser = new NETCoreProjectParser();
             IDatabaseParser databaseParser = new EntityFrameworkDatabaseParser();
@@ -24,83 +24,62 @@ namespace DirParser {
 
             DirFile file;
 
-            List<ProcedureParseReport> list = new List<ProcedureParseReport>();
+            List<ProcedureParseReport> procedureList = new List<ProcedureParseReport>();
+            List<DatabaseParseReport> databaseList = new List<DatabaseParseReport>();
+            List<ProjectParseReport> projectList = new List<ProjectParseReport>();
+            int total = 0;
+            int hits = 0;
             while ((file = directoryBrowser.NextFile()) != null) {
+
+                bool tempHit = false;
                 ProjectParseReport projectParseReport = projectParser.Parse(file);
 
                 if (projectParseReport != null && projectParseReport.Name != null) {
-                    Console.WriteLine(file.Name);
-                    Console.WriteLine(OutputProjectReport(projectParseReport));
+                    projectList.Add(projectParseReport);
+                    tempHit = true;
                 }
 
                 DatabaseParseReport parseReports = databaseParser.Parse(file);
 
                 if (parseReports != null && parseReports.Tables.Count() > 0) {
-                    Console.WriteLine(file.Name);
-                    Console.WriteLine(OutputDatabaseReport(parseReports));
+                    databaseList.Add(parseReports);
+                    tempHit = true;
                 }
 
                 ProcedureParseReport procParseReport = procedureParser.Parse(file);
 
                 if (procParseReport != null && procParseReport.Name != null) {
-                    list.Add(procParseReport);
-                    Console.WriteLine(file.Name);
-                    Console.WriteLine(OutputProcedureReport(procParseReport));
+                    procedureList.Add(procParseReport);
+                    tempHit = true;
                 }
 
-                //Console.Write("\rFiles Browsed: {0}, Hits: {1}, Misses: {2}, Current: {3}", ++i, hits, i - hits, file.Name);
+                total++;
+                if (tempHit) {
+                    hits++;
+                }
+
+                UpdateConsoleStatus(total, hits, total - hits, file.Path, root);
             }
 
-            JsonFileWriter.WriteToFile(ParseProcs(list), "output.json");
+            JsonFileWriter.WriteToFile(procedureList, "procedureReport.json");
+            JsonFileWriter.WriteToFile(databaseList, "databaseReport.json");
+            JsonFileWriter.WriteToFile(projectList, "projectReport.json");
         }
 
-        private static JObject ParseProcs(IEnumerable<ProcedureParseReport> reports) { 
-            JArray nodes = new JArray(reports.Select(x => x.Name).Concat(reports.SelectMany(x => x.Procedures)).Distinct().Select(x => JObject.Parse("{ \"name\":\"" + x + "\", \"group\":1 }")));
-            JArray links = new JArray(reports.SelectMany(x => x.Procedures.Select(y => JObject.Parse("{ \"source\":\"" + x.Name + "\", \"target\":\"" + y + "\", \"value\":1 }"))));
-
-            JObject res = new JObject();
-            res["nodes"] = nodes;
-            res["links"] = links;
-
-            return res;
+        private static void UpdateConsoleStatus(int total, int hits, int misses, string currentPath, string rootPath="") {
+            string printPath = currentPath.Substring(rootPath.Length, currentPath.Length - rootPath.Length);
+            ClearConsoleLines(0,1);
+            Console.SetCursorPosition(0, 0);
+            Console.WriteLine("Files Browsed: {0}, Hits: {1}, Misses: {2}", total, hits, misses);
+            Console.WriteLine(printPath.Length > Console.WindowWidth ? printPath.Substring(0, Console.WindowWidth) : printPath);
         }
-
-        private static void RefreshConsole() {
-            Console.WriteLine("\r" + new string(' ', Console.WindowWidth - 2));
-        }
-
-        private static string OutputProjectReport(ProjectParseReport projectParseReport) {
-            string header = "\tProject Report";
-            string refs = String.Join(',', projectParseReport.ReferencedProjects.Select(x => x.Name+"."+x.Extension));
-            string name = projectParseReport.Name;
-
-            string output = header + "\n" +
-                            "\t\tName: " + name + "\n" +
-                            "\t\tReferences: " + refs;
-
-            return output;
-        }
-
-        private static string OutputDatabaseReport(DatabaseParseReport dbReport) {
-            string header = "\tDatabase Report";
-            string tables = String.Join(',', dbReport.Tables.Select(x => x.Name));
-
-            string output = header + "\n" +
-                            "\t\tTables: " + tables;
-
-            return output;
-        }
-
-        private static string OutputProcedureReport(ProcedureParseReport dbReport) {
-            string header = "\tProcedure Report";
-            string tables = String.Join(',', dbReport.Tables.Select(x => x.Name));
-            string procs = String.Join(',', dbReport.Procedures);
-
-            string output = header + "\n" +
-                            "\t\tTables: " + tables + "\n" +
-                            "\t\tProcedures: " + procs;
-
-            return output;
+        private static void ClearConsoleLines(params int[] lineNums) {
+            int currentLineCursor = Console.CursorTop;
+            foreach(int i in lineNums) {
+                Console.SetCursorPosition(0, i);
+                Console.Write(new string(' ', Console.WindowWidth));
+            }
+            Console.SetCursorPosition(0, currentLineCursor);
         }
     }
 }
