@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\DirParser.Core\DirParser.Core.csproj" />
     <ProjectReference Include="..\..\Core\DirParser.Database.Core\DirParser.Database.Core.csproj" />
+    <ProjectReference Include="..\..\Core\DirParser.File.Core\DirParser.File.Core.csproj" />
     <ProjectReference Include="..\..\Project\DirParser.Project.Core\DirParser.Project.Core.csproj" />
   </ItemGroup>
 

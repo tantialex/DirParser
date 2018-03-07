@@ -10,7 +10,7 @@ namespace DirParser {
         public static void WriteToFile<TObject>(TObject obj, string path) {
             string content = JsonConvert.SerializeObject(obj);
 
-            File.WriteAllText(path, content);
+            System.IO.File.WriteAllText(path, content);
         }
     }
 }

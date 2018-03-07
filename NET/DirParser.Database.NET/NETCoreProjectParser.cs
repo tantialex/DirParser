@@ -1,4 +1,7 @@
 ﻿using DirParser.Core;
+using DirParser.Database.Core;
+using DirParser.File.Core;
+using DirParser.Procedure.Core;
 using DirParser.Project.Core;
 using System;
 using System.Collections.Generic;
@@ -8,25 +11,33 @@ using System.Text.RegularExpressions;
 
 namespace DirParser.NET {
     public class NETCoreProjectParser : IProjectParser {
-        private static readonly Regex NAME_REGEX = new Regex("(?<name>.+)\\.(?<ext>.+)");
         private static readonly Regex REFERENCE_REGEX = new Regex("<ProjectReference Include=\"[.]*\\\\(?:.+\\\\)*(?<refName>.+)\\.(?<ext>.+)\"");
 
-        public ProjectParseReport Parse(DirFile file) {
-            ProjectParseReport databaseReport = null;
+        private IEnumerable<IFileParser> _fileParsers;
 
-            if(file.Extension == "csproj") {
-                databaseReport = new ProjectParseReport(GetName(file.Name), GetReferences(file.Content));
-            }
-
-            return databaseReport;
+        public NETCoreProjectParser(params IFileParser[] fileParsers) {
+            this._fileParsers = fileParsers ?? new IFileParser[0];
         }
 
-        private string GetName(string source) {
-            MatchCollection matches = NAME_REGEX.Matches(source);
+        public ProjectParseReport Parse(DirFile file) {
+            List<FileParseReport> fileReports = new List<FileParseReport>();
 
-            Match match = matches.FirstOrDefault();
-                
-            return match.Groups["name"].Value.Trim();
+            //TODO: Inject
+            string root = file.Path.Substring(0, file.Path.Length - file.Name.Length);
+            DirectoryBrowser directoryBrowser = new DirectoryBrowser(root, new FileReader(), new string[] { "node_modules" });
+
+            DirFile currFile;
+            while ((currFile = directoryBrowser.NextFile()) != null) {
+                List<FileParseReport> currFileReports = new List<FileParseReport>();
+
+                foreach (IFileParser parser in _fileParsers) {
+                    currFileReports.Add(parser.Parse(currFile));
+                }
+
+                fileReports.Add(new FileParseReport(currFile.Name, currFileReports.Where(x => x != null).SelectMany(x => x.Databases), currFileReports.Where(x => x != null).SelectMany(x => x.Procedures)));
+            }
+
+            return new ProjectParseReport(file.Name, GetReferences(file.Content), fileReports);
         }
 
         private IEnumerable<ReferenceParseReport> GetReferences(string source) {

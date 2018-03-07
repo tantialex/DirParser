@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirParser.Procedure.Core", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirParser.Project.Core", "Project\DirParser.Project.Core\DirParser.Project.Core.csproj", "{BCBCA9F9-3A65-48A3-9D00-1CF5A96B1B3B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirParser.File.Core", "Core\DirParser.File.Core\DirParser.File.Core.csproj", "{C07B2307-BF0B-43B3-ACA2-56D5A642746C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{BCBCA9F9-3A65-48A3-9D00-1CF5A96B1B3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCBCA9F9-3A65-48A3-9D00-1CF5A96B1B3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCBCA9F9-3A65-48A3-9D00-1CF5A96B1B3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C07B2307-BF0B-43B3-ACA2-56D5A642746C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C07B2307-BF0B-43B3-ACA2-56D5A642746C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C07B2307-BF0B-43B3-ACA2-56D5A642746C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C07B2307-BF0B-43B3-ACA2-56D5A642746C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,6 +97,7 @@ Global
 		{53E84877-4F5F-4E3B-94ED-999BB897A81F} = {E6C251DD-FF28-4808-9A3A-2C5F4064EE10}
 		{042B0A1B-334C-4574-AAC9-266C0B1EA412} = {F64845EC-81BC-4327-B0F9-D255E20A515F}
 		{BCBCA9F9-3A65-48A3-9D00-1CF5A96B1B3B} = {F64845EC-81BC-4327-B0F9-D255E20A515F}
+		{C07B2307-BF0B-43B3-ACA2-56D5A642746C} = {F64845EC-81BC-4327-B0F9-D255E20A515F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {87A675AE-5418-4E14-832F-F3779DC79003}

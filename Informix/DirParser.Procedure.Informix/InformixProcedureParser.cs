@@ -12,13 +12,13 @@ namespace DirParser.Informix {
         private static readonly Regex TABLE_REGEX = new Regex("[\\n,\\r, ,\\t]from[ ]+(?<tableName>[^ ,\\n,;]+)"); //TODO: Fix to accept after comma
 
         public ProcedureParseReport Parse(DirFile file) {
-            ProcedureParseReport procedureReport = null;
+            string name = GetName(file.Content);
 
-            if (file.Extension == "sql") {
-                procedureReport = new ProcedureParseReport(GetName(file.Content), GetProcedures(file.Content), GetTables(file.Content));
+            if(name != null) {
+                return new ProcedureParseReport(name, GetProcedures(file.Content), GetTables(file.Content));
             }
 
-            return procedureReport;
+            return null;
         }
 
         private string GetName(string source) {

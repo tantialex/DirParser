@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\DirParser.File.Core\DirParser.File.Core.csproj" />
     <ProjectReference Include="..\..\Core\DirParser.Procedure.Core\DirParser.Procedure.Core.csproj" />
   </ItemGroup>
 
